@@ -3,6 +3,8 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <iomanip>
 
 #ifndef ONLINE_JUDGE
 #include "test_cases.h"
@@ -66,6 +68,30 @@ list<digit_repeat_time> compile_directory(const vector<string>& phone_list) {
 
 int main(int argc, char **argv) {
 	run_test(argc, argv);
+
+	unsigned int directory_count = 0;
+	cin >> directory_count;
+	cin.ignore(2, '\n');
+
+	cout.fill('0');
+	for (unsigned int d = 0; d < directory_count; ++d) {
+		unsigned int phone_count = 0;
+		vector<string> phone_list;
+		cin >> phone_count;
+		cin.ignore(1, '\n');
+		for (unsigned int p = 0; p < phone_count; ++p) {
+			string phone = "";
+			getline(cin, phone);
+			phone_list.push_back(phone);
+		}
+		list<digit_repeat_time> repeat_times = compile_directory(phone_list);
+		for (digit_repeat_time rt : repeat_times) {
+			if (rt.second > 1) {
+				cout << setw(3) << rt.first / 10000 << "-" << setw(4) << rt.first % 10000 << " " << rt.second << endl;
+			}
+		}
+		cin.ignore(1, '\n');
+	}
 
 	return 0;
 }
