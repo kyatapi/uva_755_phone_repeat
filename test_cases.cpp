@@ -20,3 +20,12 @@ TEST(PhoneToDigit, HandleAlphabeticPhone) {
 	ASSERT_EQ(4875566, phone_to_digit("HUP-KLON"));
 	ASSERT_EQ(6666345, phone_to_digit("NO-NO-DHL"));
 }
+
+TEST(PhoneToDigit, HandleAlphanumericPhone) {
+	ASSERT_EQ(8352266, phone_to_digit("TEL-2266"));
+	ASSERT_EQ(3376836, phone_to_digit("337-OUEN"));
+}
+
+TEST(PhoneToDigit, HandleInvalidPhone) {
+	ASSERT_EQ(0, phone_to_digit("QQ-QQ-ZZZ"));
+}
