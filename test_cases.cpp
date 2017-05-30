@@ -48,3 +48,8 @@ TEST(CompileDirectory, HandleNoRepeatAndOrdered) {
 TEST(CompileDirectory, HandleNoRepeatNotOrdered) {
 	EXPECT_THAT(compile_directory({ "888", "456", "789" }), ElementsAre(Pair(456, 1), Pair(789, 1), Pair(888, 1)));
 }
+
+TEST(CompileDirectory, HandleRepeatNotOrdered) {
+	EXPECT_THAT(compile_directory({ "888", "456", "789", "456" }), ElementsAre(Pair(456, 2), Pair(789, 1), Pair(888, 1)));
+	EXPECT_THAT(compile_directory({ "888", "456", "789", "456", "123", "123", "123" }), ElementsAre(Pair(123, 3), Pair(456, 2), Pair(789, 1), Pair(888, 1)));
+}
