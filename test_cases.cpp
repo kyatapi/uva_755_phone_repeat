@@ -1,9 +1,12 @@
 #include <string>
+#include <list>
+#include <vector>
 #include "test_cases.h"
 
 using namespace std;
 
 extern unsigned int phone_to_digit(const string&);
+list< pair<int, int> > compile_directory(const vector<string>&);
 
 TEST(PhoneToDigit, HandleEmptyPhone) {
 	ASSERT_EQ(0, phone_to_digit(""));
@@ -28,4 +31,10 @@ TEST(PhoneToDigit, HandleAlphanumericPhone) {
 
 TEST(PhoneToDigit, HandleInvalidPhone) {
 	ASSERT_EQ(0, phone_to_digit("QQ-QQ-ZZZ"));
+}
+
+using ::testing::IsEmpty;
+
+TEST(CompileDirectory, HandleEmptyList) {
+	EXPECT_THAT(compile_directory({}), IsEmpty());
 }

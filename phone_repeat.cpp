@@ -1,5 +1,7 @@
 #include <string>
 #include <map>
+#include <list>
+#include <vector>
 
 #ifndef ONLINE_JUDGE
 #include "test_cases.h"
@@ -36,6 +38,12 @@ unsigned int phone_to_digit(const string& phone) {
 	}
 
 	return digits;
+}
+
+list< pair<int, int> > compile_directory(const vector<string>& phone_list) {
+	list< pair<int, int> > phone_repeat_times;
+
+	return phone_repeat_times;
 }
 
 int main(int argc, char **argv) {
