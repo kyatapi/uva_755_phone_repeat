@@ -6,7 +6,7 @@
 using namespace std;
 
 extern unsigned int phone_to_digit(const string&);
-list< pair<int, int> > compile_directory(const vector<string>&);
+list< pair<unsigned int, unsigned int> > compile_directory(const vector<string>&);
 
 TEST(PhoneToDigit, HandleEmptyPhone) {
 	ASSERT_EQ(0, phone_to_digit(""));
@@ -43,4 +43,8 @@ TEST(CompileDirectory, HandleEmptyList) {
 
 TEST(CompileDirectory, HandleNoRepeatAndOrdered) {
 	EXPECT_THAT(compile_directory({"123", "456", "789"}), ElementsAre(Pair(123, 1), Pair(456, 1), Pair(789, 1)));
+}
+
+TEST(CompileDirectory, HandleNoRepeatNotOrdered) {
+	EXPECT_THAT(compile_directory({ "888", "456", "789" }), ElementsAre(Pair(456, 1), Pair(789, 1), Pair(888, 1)));
 }

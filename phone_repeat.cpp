@@ -2,6 +2,7 @@
 #include <map>
 #include <list>
 #include <vector>
+#include <algorithm>
 
 #ifndef ONLINE_JUDGE
 #include "test_cases.h"
@@ -40,15 +41,27 @@ unsigned int phone_to_digit(const string& phone) {
 	return digits;
 }
 
-list< pair<int, int> > compile_directory(const vector<string>& phone_list) {
-	list< pair<int, int> > phone_repeat_times;
+typedef pair<unsigned int, unsigned int> digit_repeat_time;
+
+list<digit_repeat_time> compile_directory(const vector<string>& phone_list) {
+	list<digit_repeat_time> repeat_times;
 
 	for (const string& p : phone_list) {
-		unsigned int digits = phone_to_digit(p);
-		phone_repeat_times.push_back(pair<int, int>(digits, 1));
+		digit_repeat_time entry(phone_to_digit(p), 1);
+		list<digit_repeat_time>::iterator ite = lower_bound(repeat_times.begin(), 
+			                                                repeat_times.end(),
+															entry, 
+			                                                [](const digit_repeat_time& element, const digit_repeat_time& value) { return element.first < value.first; });
+
+		if (ite != repeat_times.end() && ite->first == entry.first) {
+			ite->second += 1;
+		}
+		else {
+			repeat_times.insert(ite, entry);
+		}
 	}
 
-	return phone_repeat_times;
+	return repeat_times;
 }
 
 int main(int argc, char **argv) {
