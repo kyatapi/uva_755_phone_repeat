@@ -85,11 +85,17 @@ int main(int argc, char **argv) {
 			phone_list.push_back(phone);
 		}
 		list<digit_repeat_time> repeat_times = compile_directory(phone_list);
+		unsigned int repeat_entry_count = 0;
 		for (digit_repeat_time rt : repeat_times) {
 			if (rt.second > 1) {
 				cout << setw(3) << rt.first / 10000 << "-" << setw(4) << rt.first % 10000 << " " << rt.second << endl;
+				++repeat_entry_count;
 			}
 		}
+		if (repeat_entry_count == 0) {
+			cout << "No duplicates." << endl;
+		}
+		cout << endl;
 		cin.ignore(1, '\n');
 	}
 
