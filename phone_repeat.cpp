@@ -16,7 +16,7 @@ inline void run_test(int argc, char **argv) {}
 using namespace std;
 
 unsigned int phone_to_digit(const string& phone) {
-	const map<char, int> char_digit_mapping = {
+	static const map<char, int> char_digit_mapping = {
 		{ '0', 0 }, 
 		{ '1', 1 }, { '2', 2 }, { '3', 3 },
 		{ '4', 4 }, { '5', 5 }, { '6', 6 },
