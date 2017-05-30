@@ -43,6 +43,11 @@ unsigned int phone_to_digit(const string& phone) {
 list< pair<int, int> > compile_directory(const vector<string>& phone_list) {
 	list< pair<int, int> > phone_repeat_times;
 
+	for (const string& p : phone_list) {
+		unsigned int digits = phone_to_digit(p);
+		phone_repeat_times.push_back(pair<int, int>(digits, 1));
+	}
+
 	return phone_repeat_times;
 }
 

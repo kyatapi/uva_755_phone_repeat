@@ -34,7 +34,13 @@ TEST(PhoneToDigit, HandleInvalidPhone) {
 }
 
 using ::testing::IsEmpty;
+using ::testing::ElementsAre;
+using ::testing::Pair;
 
 TEST(CompileDirectory, HandleEmptyList) {
 	EXPECT_THAT(compile_directory({}), IsEmpty());
+}
+
+TEST(CompileDirectory, HandleNoRepeatAndOrdered) {
+	EXPECT_THAT(compile_directory({"123", "456", "789"}), ElementsAre(Pair(123, 1), Pair(456, 1), Pair(789, 1)));
 }
