@@ -86,7 +86,9 @@ int main(int argc, char **argv) {
 		if (repeat_entry_count == 0) {
 			cout << "No duplicates." << endl;
 		}
-		cout << endl;
+		if (d < directory_count - 1) {
+			cout << endl;
+		}
 		cin.ignore(1, '\n');
 	}
 
