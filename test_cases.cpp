@@ -6,7 +6,7 @@
 using namespace std;
 
 extern unsigned int phone_to_digit(const string&);
-list< pair<unsigned int, unsigned int> > compile_directory(const vector<string>&);
+map<unsigned int, unsigned int> compile_directory(const vector<string>&);
 
 TEST(PhoneToDigit, HandleEmptyPhone) {
 	ASSERT_EQ(0, phone_to_digit(""));

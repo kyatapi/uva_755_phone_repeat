@@ -47,24 +47,11 @@ unsigned int phone_to_digit(const string& phone) {
 	return digits;
 }
 
-typedef pair<unsigned int, unsigned int> digit_repeat_time;
-
-list<digit_repeat_time> compile_directory(const vector<string>& phone_list) {
-	list<digit_repeat_time> repeat_times;
+map<unsigned int, unsigned int> compile_directory(const vector<string>& phone_list) {
+	map<unsigned int, unsigned int> repeat_times;
 
 	for (const string& p : phone_list) {
-		digit_repeat_time entry(phone_to_digit(p), 1);
-		list<digit_repeat_time>::iterator ite = lower_bound(repeat_times.begin(), 
-			                                                repeat_times.end(),
-															entry, 
-			                                                [](const digit_repeat_time& element, const digit_repeat_time& value) { return element.first < value.first; });
-
-		if (ite != repeat_times.end() && ite->first == entry.first) {
-			ite->second += 1;
-		}
-		else {
-			repeat_times.insert(ite, entry);
-		}
+		repeat_times[phone_to_digit(p)]++;
 	}
 
 	return repeat_times;
@@ -88,9 +75,9 @@ int main(int argc, char **argv) {
 			getline(cin, phone);
 			phone_list.push_back(phone);
 		}
-		list<digit_repeat_time> repeat_times = compile_directory(phone_list);
+		map<unsigned int, unsigned int> repeat_times = compile_directory(phone_list);
 		unsigned int repeat_entry_count = 0;
-		for (digit_repeat_time rt : repeat_times) {
+		for (auto rt : repeat_times) {
 			if (rt.second > 1) {
 				cout << setw(3) << rt.first / 10000 << "-" << setw(4) << rt.first % 10000 << " " << rt.second << endl;
 				++repeat_entry_count;
